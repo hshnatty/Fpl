@@ -43,9 +43,15 @@ section {
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-#leagueTable, #myTeam {
+#leagueTable, #myTeam, #postsList {
   margin-top: 1rem;
   min-height: 100px;
   border: 1px dashed #ccc;
   padding: 1rem;
+}
+
+#postInput {
+  width: 80%;
+  padding: 0.5rem;
+  margin-right: 0.5rem;
 }
