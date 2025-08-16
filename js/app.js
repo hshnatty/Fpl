@@ -1,5 +1,3 @@
-// js/app.js
-
 // Fetch players from Netlify Function
 async function fetchPlayers(league, season) {
   try {
@@ -16,18 +14,17 @@ async function fetchPlayers(league, season) {
     const data = await response.json();
     console.log("Players data:", data); // Debugging in browser console
 
-    // Some APIs return nested data (API-Football uses data.response).
+    // API-Football uses data.response
     const players = data.response || data.players || [];
-
     renderPlayers(players);
   } catch (err) {
     console.error("Fetch error:", err);
     document.getElementById("players").innerHTML =
-      `<p style="color:red;">Error loading players: ${err.message}</p>`;
+      `<p style="color:red;">Failed to load players.</p>`;
   }
 }
 
-// Render players to the page
+// Render players to UI
 function renderPlayers(players) {
   const container = document.getElementById("players");
   container.innerHTML = "";
@@ -37,23 +34,27 @@ function renderPlayers(players) {
     return;
   }
 
-  players.forEach((playerObj) => {
-    // API-Football returns { player: {...}, statistics: [...] }
-    const player = playerObj.player || playerObj;
+  players.forEach(p => {
+    const playerCard = document.createElement("div");
+    playerCard.className = "player-card";
+    playerCard.style.border = "1px solid #ddd";
+    playerCard.style.padding = "10px";
+    playerCard.style.margin = "10px 0";
+    playerCard.style.borderRadius = "8px";
+    playerCard.style.background = "#f9f9f9";
 
-    const card = document.createElement("div");
-    card.classList.add("player-card");
-
-    card.innerHTML = `
-      <img src="${player.photo || "https://via.placeholder.com/50"}" alt="${player.name}">
-      <h3>${player.name}</h3>
-      <p>Age: ${player.age || "N/A"}</p>
-      <p>Nationality: ${player.nationality || "N/A"}</p>
+    playerCard.innerHTML = `
+      <img src="${p.player.photo}" alt="${p.player.firstname} ${p.player.lastname}" width="50" style="border-radius:50%;" />
+      <p><strong>${p.player.firstname} ${p.player.lastname}</strong></p>
+      <p>Team: ${p.statistics[0]?.team?.name || "N/A"}</p>
+      <p>Age: ${p.player.age} | Nationality: ${p.player.nationality}</p>
     `;
 
-    container.appendChild(card);
+    container.appendChild(playerCard);
   });
 }
 
-// Example: Premier League (39) Season 2024
-fetchPlayers(39, 2024);
+// Call fetch on page load (Premier League, 2023 season as example)
+document.addEventListener("DOMContentLoaded", () => {
+  fetchPlayers(39, 2023);
+});
