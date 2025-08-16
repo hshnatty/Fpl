@@ -7,6 +7,30 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <!-- Firebase App (core) -->
+<script type="module">
+  // Import the functions from Firebase
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  // Your Firebase config
+  const firebaseConfig = {
+    apiKey: "AIzaSyBOcQz6KoL9LnwavdGLaLAsEeYEOXsXUiM",
+    authDomain: "fantasy-football-f8fae.firebaseapp.com",
+    projectId: "fantasy-football-f8fae",
+    storageBucket: "fantasy-football-f8fae.firebasestorage.app",
+    messagingSenderId: "974520941117",
+    appId: "1:974520941117:web:d68f1b3d265c29a11d0854",
+    measurementId: "G-B0G0891E04"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // Make db available globally (so app.js can use it)
+  window.db = db;
+</script>
   <header>
     <h1>Fantasy Football</h1>
     <select id="leagueSelect">
