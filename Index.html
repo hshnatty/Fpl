@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fantasy Football</title>
   <link rel="stylesheet" href="css/style.css">
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js"></script>
 </head>
 <body>
   <header>
@@ -26,12 +33,19 @@
       <h2>League</h2>
       <div id="leagueTable"></div>
     </section>
+
+    <section id="postsSection">
+      <h2>Posts</h2>
+      <input type="text" id="postInput" placeholder="Write something...">
+      <button id="postBtn">Post</button>
+      <div id="postsList"></div>
+    </section>
   </main>
 
   <footer>
     <p>Fantasy Football Starter © 2025</p>
   </footer>
 
-  <script src="js/app.js"></script>
+  <script src="js/app.js" type="module"></script>
 </body>
 </html>
