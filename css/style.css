@@ -1,8 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background: #0b6623; /* football pitch green */
+  background: #0b6623;
   color: white;
   text-align: center;
 }
@@ -10,38 +8,21 @@ body {
 header {
   background: #222;
   padding: 15px;
-  color: #fff;
-}
-
-.team {
-  padding: 20px;
 }
 
 .formation {
   display: flex;
-  flex-direction: column;
-  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
   margin: 20px 0;
 }
 
-.line {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-}
-
-.bench {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 15px;
-}
-
 .player-card {
-  background: rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.15);
   padding: 10px;
   border-radius: 10px;
-  width: 80px;
+  width: 90px;
 }
 
 .player-card img {
