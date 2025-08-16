@@ -1,7 +1,7 @@
 // netlify/functions/players.js
 
 const league = "39"; // Example: Premier League
-const season = "2024"; // Example: 2024 season
+const season = "2023"; // Example: 2024 season
 const API_KEY = process.env.FOOTBALL_API_KEY; // Set in Netlify env vars
 
 exports.handler = async function(event, context) {
