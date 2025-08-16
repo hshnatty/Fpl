@@ -9,24 +9,42 @@
 <body>
   <header>
     <h1>Fantasy Football</h1>
+    <select id="leagueSelect">
+      <option value="39">Premier League</option>
+      <option value="140">La Liga</option>
+      <option value="135">Serie A</option>
+      <option value="78">Bundesliga</option>
+      <option value="61">Ligue 1</option>
+    </select>
   </header>
 
   <main>
-    <!-- My Team Section -->
-    <section class="team">
+    <section>
       <h2>My Team</h2>
-      <div class="formation">
-        <div id="goalkeeper" class="line"></div>
-        <div id="defenders" class="line"></div>
-        <div id="midfielders" class="line"></div>
-        <div id="forwards" class="line"></div>
-      </div>
+      <div id="team" class="formation"></div>
+      <button id="saveTeam">Save Team</button>
+    </section>
 
-      <h3>Bench</h3>
-      <div id="bench" class="bench"></div>
+    <section>
+      <h2>Add Player</h2>
+      <input type="text" id="playerInput" placeholder="Type player name..." />
+      <select id="positionSelect">
+        <option value="G">Goalkeeper</option>
+        <option value="D">Defender</option>
+        <option value="M">Midfielder</option>
+        <option value="F">Forward</option>
+      </select>
+      <button id="addPlayer">Add to Team</button>
+    </section>
+
+    <section>
+      <h2>Overall Points</h2>
+      <div id="points">0</div>
     </section>
   </main>
 
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
