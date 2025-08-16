@@ -5,35 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fantasy Football</title>
   <link rel="stylesheet" href="css/style.css">
-
-  <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"></script>
 </head>
 <body>
   <header>
     <h1>Fantasy Football</h1>
-    <button id="loginBtn">Login</button>
   </header>
 
   <main>
-    <section>
+    <!-- My Team Section -->
+    <section class="team">
       <h2>My Team</h2>
-      <div id="players"></div>
-    </section>
+      <div class="formation">
+        <div id="goalkeeper" class="line"></div>
+        <div id="defenders" class="line"></div>
+        <div id="midfielders" class="line"></div>
+        <div id="forwards" class="line"></div>
+      </div>
 
-    <section>
-      <h2>League</h2>
-      <div id="league"></div>
-    </section>
-
-    <section>
-      <h2>Posts</h2>
-      <textarea placeholder="Write something..."></textarea>
-      <button>Post</button>
-      <div id="posts"></div>
+      <h3>Bench</h3>
+      <div id="bench" class="bench"></div>
     </section>
   </main>
 
