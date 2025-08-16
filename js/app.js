@@ -1,4 +1,4 @@
-// Fetch players from Netlify Function
+// Fetch players from API (Netlify function)
 async function fetchPlayers(league, season) {
   try {
     const response = await fetch(
@@ -6,55 +6,54 @@ async function fetchPlayers(league, season) {
     );
 
     if (!response.ok) {
-      const errorText = await response.text();
-      console.error("Function error:", errorText);
       throw new Error("Failed to fetch players");
     }
 
     const data = await response.json();
-    console.log("Players data:", data); // Debugging in browser console
+    console.log("Players data:", data);
 
-    // API-Football uses data.response
-    const players = data.response || data.players || [];
-    renderPlayers(players);
+    const players = data.response || [];
+    renderFantasyTeam(players);
   } catch (err) {
     console.error("Fetch error:", err);
-    document.getElementById("players").innerHTML =
-      `<p style="color:red;">Failed to load players.</p>`;
   }
 }
 
-// Render players to UI
-function renderPlayers(players) {
-  const container = document.getElementById("players");
+// Render players in a fantasy formation
+function renderFantasyTeam(players) {
+  // Example: just take first few players to mock a team
+  const gk = players.filter(p => p.statistics[0]?.games?.position === "G")[0];
+  const defs = players.filter(p => p.statistics[0]?.games?.position === "D").slice(0, 4);
+  const mids = players.filter(p => p.statistics[0]?.games?.position === "M").slice(0, 4);
+  const fwds = players.filter(p => p.statistics[0]?.games?.position === "F").slice(0, 2);
+  const bench = players.slice(11, 15);
+
+  addPlayersToLine("goalkeeper", [gk]);
+  addPlayersToLine("defenders", defs);
+  addPlayersToLine("midfielders", mids);
+  addPlayersToLine("forwards", fwds);
+  addPlayersToLine("bench", bench);
+}
+
+// Utility: render players into a line
+function addPlayersToLine(containerId, players) {
+  const container = document.getElementById(containerId);
   container.innerHTML = "";
 
-  if (!players.length) {
-    container.innerHTML = "<p>No players found.</p>";
-    return;
-  }
-
   players.forEach(p => {
-    const playerCard = document.createElement("div");
-    playerCard.className = "player-card";
-    playerCard.style.border = "1px solid #ddd";
-    playerCard.style.padding = "10px";
-    playerCard.style.margin = "10px 0";
-    playerCard.style.borderRadius = "8px";
-    playerCard.style.background = "#f9f9f9";
-
-    playerCard.innerHTML = `
-      <img src="${p.player.photo}" alt="${p.player.firstname} ${p.player.lastname}" width="50" style="border-radius:50%;" />
-      <p><strong>${p.player.firstname} ${p.player.lastname}</strong></p>
-      <p>Team: ${p.statistics[0]?.team?.name || "N/A"}</p>
-      <p>Age: ${p.player.age} | Nationality: ${p.player.nationality}</p>
+    if (!p) return;
+    const card = document.createElement("div");
+    card.className = "player-card";
+    card.innerHTML = `
+      <img src="${p.player.photo}" alt="${p.player.name}" />
+      <p>${p.player.name}</p>
+      <small>${p.statistics[0]?.games?.position || "?"}</small>
     `;
-
-    container.appendChild(playerCard);
+    container.appendChild(card);
   });
 }
 
-// Call fetch on page load (Premier League, 2023 season as example)
+// Load on page start
 document.addEventListener("DOMContentLoaded", () => {
-  fetchPlayers(39, 2023);
+  fetchPlayers(39, 2023); // Example: Premier League 2023
 });
